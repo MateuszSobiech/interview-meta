@@ -1,35 +1,72 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import './App.css';
+import { Item, ItemContainer } from './components/ItemContainer/ItemContainer';
+import { ButtonWithIcon } from './components/ui/ButtonWithIcon';
+
+const PARENT_IDS = {
+  A: 'A',
+  B: 'B',
+} as const
+
+export type ParentIds = keyof typeof PARENT_IDS
+
+const initialItems: Item[] = [
+  { id: 1, label: '1', checked: false, parentId: PARENT_IDS.A },
+  { id: 2, label: '2', checked: false, parentId: PARENT_IDS.A },
+  { id: 3, label: '3', checked: false, parentId: PARENT_IDS.A },
+  { id: 4, label: '4', checked: false, parentId: PARENT_IDS.A },
+];
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [items, setItems] = useState(initialItems);
+  const itemsA = items.filter(item => item.parentId === PARENT_IDS.A)
+  const itemsB = items.filter(item => item.parentId === PARENT_IDS.B)
 
+  const onChangeCheckbox = (itemId: number) => {
+    setItems(elements => elements.map(element => {
+      if(element.id !== itemId) return element
+
+      return {
+        ...element,
+        checked: !element.checked,
+      }
+    }))
+  }
+
+  const onClickButton = (parentFrom: ParentIds, parentTo: ParentIds) => () => {
+    setItems(elements => elements.map(element => {
+      if(element.parentId !== parentFrom || !element.checked) return element;
+
+      return {
+        ...element,
+        checked: false,
+        parentId: parentTo,
+      }
+    }))
+  }
+    
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: 124,
+      }}
+    >
+      <ItemContainer items={itemsA} onChage={onChangeCheckbox} />
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 64,
+        }}
+      >
+        <ButtonWithIcon onClick={onClickButton(PARENT_IDS.A, PARENT_IDS.B)}>{'>'}</ButtonWithIcon>
+        <ButtonWithIcon onClick={onClickButton(PARENT_IDS.B, PARENT_IDS.A)}>{'<'}</ButtonWithIcon>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+      <ItemContainer items={itemsB} onChage={onChangeCheckbox} />
+    </div>
+  );
 }
 
-export default App
+export default App;
