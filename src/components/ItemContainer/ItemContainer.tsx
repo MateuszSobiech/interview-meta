@@ -1,12 +1,6 @@
 import { FC } from 'react';
-import { ParentIds } from '../../App';
-
-export interface Item {
-  id: number;
-  label: string;
-  checked: boolean;
-  parentId: ParentIds;
-}
+import styles from './ItemContainer.module.css';
+import { Item } from '../../types/Item';
 
 interface ItemContainerProps {
   items: Item[];
@@ -15,30 +9,14 @@ interface ItemContainerProps {
 
 export const ItemContainer: FC<ItemContainerProps> = ({ items, onChage }) => {
   return (
-    <div
-      style={{
-        width: 250,
-        height: 500,
-        border: 'white 1px solid',
-        borderRadius: 30,
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 24,
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontSize: 18,
-      }}
-    >
+    <div className={styles.container}>
       {items.map(({ id, checked, label }) => (
         <label key={id}>
           <input
-            style={{
-              width: 18,
-              height: 18,
-            }}
+            className={styles.input}
             type='checkbox'
-            onChange={() => onChage(id)}
             checked={checked}
+            onChange={() => onChage(id)}
           />{' '}
           <span>{label}</span>
         </label>
