@@ -4,10 +4,10 @@ import { Item } from '../../types/Item';
 
 interface ItemContainerProps {
   items: Item[];
-  onChage: (itemId: number) => void;
+  onChange: (itemId: number) => void;
 }
 
-export const ItemContainer: FC<ItemContainerProps> = ({ items, onChage }) => {
+export const ItemContainer: FC<ItemContainerProps> = ({ items, onChange }) => {
   return (
     <div className={styles.container}>
       {items.map(({ id, checked, label }) => (
@@ -16,7 +16,7 @@ export const ItemContainer: FC<ItemContainerProps> = ({ items, onChage }) => {
             className={styles.input}
             type='checkbox'
             checked={checked}
-            onChange={() => onChage(id)}
+            onChange={() => onChange(id)}
           />{' '}
           <span>{label}</span>
         </label>

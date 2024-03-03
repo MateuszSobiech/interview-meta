@@ -70,12 +70,12 @@ export const ItemsView: FC<ItemsViewProps> = ({ initialItems }) => {
 
   return (
     <div className={styles.container}>
-      <ItemContainer items={itemsA} onChage={onChangeCheckbox} />
+      <ItemContainer items={itemsA} onChange={onChangeCheckbox} />
       <div className={styles.buttons}>
         <ButtonWithIcon onClick={onClickMoveParentAToB}>{'>'}</ButtonWithIcon>
         <ButtonWithIcon onClick={onClickMoveParentBToA}>{'<'}</ButtonWithIcon>
       </div>
-      <ItemContainer items={itemsB} onChage={onChangeCheckbox} />
+      <ItemContainer items={itemsB} onChange={onChangeCheckbox} />
     </div>
   );
 };
