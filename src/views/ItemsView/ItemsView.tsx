@@ -1,5 +1,5 @@
 import { FC, useCallback, useMemo, useState } from 'react';
-import { ItemContainer } from '../../components/ItemContainer/ItemContainer';
+import { ItemList } from '../../components/ItemList/ItemList';
 import { PARENT_IDS, ParentIds } from '../../consts/ParentIds';
 import { ButtonWithIcon } from '../../components/ui/ButtonWithIcon/ButtonWithIcon';
 import styles from './ItemsView.module.css';
@@ -70,12 +70,12 @@ export const ItemsView: FC<ItemsViewProps> = ({ initialItems }) => {
 
   return (
     <div className={styles.container}>
-      <ItemContainer items={itemsA} onChange={onChangeCheckbox} />
+      <ItemList items={itemsA} onChange={onChangeCheckbox} />
       <div className={styles.buttons}>
         <ButtonWithIcon onClick={onClickMoveParentAToB}>{'>'}</ButtonWithIcon>
         <ButtonWithIcon onClick={onClickMoveParentBToA}>{'<'}</ButtonWithIcon>
       </div>
-      <ItemContainer items={itemsB} onChange={onChangeCheckbox} />
+      <ItemList items={itemsB} onChange={onChangeCheckbox} />
     </div>
   );
 };
