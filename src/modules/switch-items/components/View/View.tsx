@@ -3,7 +3,7 @@ import { ButtonWithIcon } from '../../../ui/ButtonWithIcon/ButtonWithIcon';
 import { useView } from '../../hooks/useView';
 import { Item } from '../../types/Item';
 import { List } from '../List/List';
-import styles from './View.module.css';
+import { StyledButtons, StyledWrapper } from './View.styles';
 
 interface ViewProps {
   initialItems: Item[];
@@ -14,13 +14,13 @@ export const View: FC<ViewProps> = ({ initialItems }) => {
     useView(initialItems);
 
   return (
-    <div className={styles.container}>
+    <StyledWrapper>
       <List items={itemsA} onChange={onChangeCheckbox} />
-      <div className={styles.buttons}>
+      <StyledButtons>
         <ButtonWithIcon onClick={onClickMoveParentAToB}>{'>'}</ButtonWithIcon>
         <ButtonWithIcon onClick={onClickMoveParentBToA}>{'<'}</ButtonWithIcon>
-      </div>
+      </StyledButtons>
       <List items={itemsB} onChange={onChangeCheckbox} />
-    </div>
+    </StyledWrapper>
   );
 };

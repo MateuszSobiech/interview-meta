@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import styles from './List.module.css';
 import { Item } from '../../types/Item';
+import { StyledCheckbox, StyledLabel, StyledWrapper } from './List.styles';
 
 interface ListProps {
   items: Item[];
@@ -9,18 +9,13 @@ interface ListProps {
 
 export const List: FC<ListProps> = ({ items, onChange }) => {
   return (
-    <div className={styles.container}>
+    <StyledWrapper>
       {items.map(({ id, checked, label }) => (
-        <label className={styles.label} key={id}>
-          <input
-            className={styles.input}
-            type='checkbox'
-            checked={checked}
-            onChange={() => onChange(id)}
-          />
+        <StyledLabel key={id}>
+          <StyledCheckbox type='checkbox' checked={checked} onChange={() => onChange(id)} />
           <span>{label}</span>
-        </label>
+        </StyledLabel>
       ))}
-    </div>
+    </StyledWrapper>
   );
 };
