@@ -1,15 +1,8 @@
-import { FC, useCallback, useMemo, useState } from 'react';
-import { ItemList } from '../../components/ItemList/ItemList';
-import { PARENT_IDS, ParentIds } from '../../consts/ParentIds';
-import { ButtonWithIcon } from '../../components/ui/ButtonWithIcon/ButtonWithIcon';
-import styles from './ItemsView.module.css';
-import { Item } from '../../types/Item';
+import { useCallback, useMemo, useState } from 'react';
+import { PARENT_IDS, ParentIds } from '../consts/ParentIds';
+import { Item } from '../types/Item';
 
-interface ItemsViewProps {
-  initialItems: Item[];
-}
-
-export const ItemsView: FC<ItemsViewProps> = ({ initialItems }) => {
+export const useView = (initialItems: Item[]) => {
   const [items, setItems] = useState(initialItems);
 
   const { itemsA, itemsB } = useMemo(() => {
@@ -68,14 +61,11 @@ export const ItemsView: FC<ItemsViewProps> = ({ initialItems }) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const onClickMoveParentBToA = useCallback(onClickButton(PARENT_IDS.B, PARENT_IDS.A), []);
 
-  return (
-    <div className={styles.container}>
-      <ItemList items={itemsA} onChange={onChangeCheckbox} />
-      <div className={styles.buttons}>
-        <ButtonWithIcon onClick={onClickMoveParentAToB}>{'>'}</ButtonWithIcon>
-        <ButtonWithIcon onClick={onClickMoveParentBToA}>{'<'}</ButtonWithIcon>
-      </div>
-      <ItemList items={itemsB} onChange={onChangeCheckbox} />
-    </div>
-  );
+  return {
+    itemsA,
+    itemsB,
+    onChangeCheckbox,
+    onClickMoveParentAToB,
+    onClickMoveParentBToA,
+  };
 };

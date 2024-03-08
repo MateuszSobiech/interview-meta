@@ -1,13 +1,13 @@
 import { FC } from 'react';
-import styles from './ItemList.module.css';
+import styles from './List.module.css';
 import { Item } from '../../types/Item';
 
-interface ItemListProps {
+interface ListProps {
   items: Item[];
   onChange: (itemId: number) => void;
 }
 
-export const ItemList: FC<ItemListProps> = ({ items, onChange }) => {
+export const List: FC<ListProps> = ({ items, onChange }) => {
   return (
     <div className={styles.container}>
       {items.map(({ id, checked, label }) => (
