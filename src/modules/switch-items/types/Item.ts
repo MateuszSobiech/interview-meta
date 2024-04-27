@@ -1,6 +1,4 @@
-import { PARENT_IDS } from "../consts/ParentIds";
-
-export type ParentIds = keyof typeof PARENT_IDS;
+import { ParentIds } from './ParentIds';
 
 export interface Item {
   id: number;

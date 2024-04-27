@@ -1,6 +1,7 @@
 import { useCallback, useMemo, useState } from 'react';
 import { PARENT_IDS } from '../consts/ParentIds';
-import { Item, ParentIds } from '../types/Item';
+import { Item } from '../types/Item';
+import { ParentIds } from '../types/ParentIds';
 
 export const useView = (initialItems: Item[]) => {
   const [items, setItems] = useState(initialItems);
