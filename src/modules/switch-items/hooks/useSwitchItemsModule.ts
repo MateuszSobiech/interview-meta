@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Item } from '../types/Item';
-import { itemsServiece } from '../api/ItemsApiService';
+import { itemsServiece } from '../api/ItemsServiece';
 
 type State =
   | {

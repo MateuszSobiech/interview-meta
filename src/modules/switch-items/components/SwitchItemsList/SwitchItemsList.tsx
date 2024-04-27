@@ -1,12 +1,12 @@
 import { Item } from '../../types/Item';
-import { StyledCheckbox, StyledLabel, StyledWrapper } from './List.styles';
+import { StyledCheckbox, StyledLabel, StyledWrapper } from './SwitchItemsList.styles';
 
-interface ListProps {
+interface SwitchItemsListProps {
   items: Item[];
   onChange: (itemId: number) => void;
 }
 
-export const List = ({ items, onChange }: ListProps) => {
+export const SwitchItemsList = ({ items, onChange }: SwitchItemsListProps) => {
   return (
     <StyledWrapper>
       {items.map(({ id, checked, label }) => (

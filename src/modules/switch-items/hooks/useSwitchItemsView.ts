@@ -3,7 +3,7 @@ import { PARENT_IDS } from '../consts/ParentIds';
 import { Item } from '../types/Item';
 import { ParentIds } from '../types/ParentIds';
 
-export const useView = (initialItems: Item[]) => {
+export const useSwitchItemsView = (initialItems: Item[]) => {
   const [items, setItems] = useState(initialItems);
 
   // if component will has more state we will
