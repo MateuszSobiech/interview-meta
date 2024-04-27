@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import { Item } from '../../types/Item';
 import { StyledCheckbox, StyledLabel, StyledWrapper } from './List.styles';
 
@@ -7,7 +6,7 @@ interface ListProps {
   onChange: (itemId: number) => void;
 }
 
-export const List: FC<ListProps> = ({ items, onChange }) => {
+export const List = ({ items, onChange }: ListProps) => {
   return (
     <StyledWrapper>
       {items.map(({ id, checked, label }) => (

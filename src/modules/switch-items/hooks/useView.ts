@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { PARENT_IDS } from '../consts/ParentIds';
 import { Item } from '../types/Item';
 import { ParentIds } from '../types/ParentIds';
@@ -6,26 +6,10 @@ import { ParentIds } from '../types/ParentIds';
 export const useView = (initialItems: Item[]) => {
   const [items, setItems] = useState(initialItems);
 
-  const { itemsA, itemsB } = useMemo(() => {
-    return items.reduce<{ itemsA: Item[]; itemsB: Item[] }>(
-      (acc, current) => {
-        switch (current.parentId) {
-          case PARENT_IDS.A:
-            acc.itemsA.push(current);
-            break;
-          case PARENT_IDS.B:
-            acc.itemsB.push(current);
-            break;
-        }
-
-        return acc;
-      },
-      {
-        itemsA: [],
-        itemsB: [],
-      }
-    );
-  }, [items]);
+  // if component will has more state we will
+  // use useMemo() for itemsA and itemsB
+  const itemsA = items.filter((item) => item.parentId === PARENT_IDS.A);
+  const itemsB = items.filter((item) => item.parentId === PARENT_IDS.B);
 
   const onChangeCheckbox = useCallback((itemId: number) => {
     setItems((elements) =>
@@ -57,6 +41,7 @@ export const useView = (initialItems: Item[]) => {
     []
   );
 
+  // onClickButton is doubled so we used higher-order function
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const onClickMoveParentAToB = useCallback(onClickButton(PARENT_IDS.A, PARENT_IDS.B), []);
   // eslint-disable-next-line react-hooks/exhaustive-deps

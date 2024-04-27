@@ -1,5 +1,4 @@
-import { FC } from 'react';
-import { ButtonWithIcon } from '../../../ui/ButtonWithIcon/ButtonWithIcon';
+import { Button } from '../../../ui/Button/Button';
 import { useView } from '../../hooks/useView';
 import { Item } from '../../types/Item';
 import { List } from '../List/List';
@@ -9,7 +8,7 @@ interface ViewProps {
   initialItems: Item[];
 }
 
-export const View: FC<ViewProps> = ({ initialItems }) => {
+export const View = ({ initialItems }: ViewProps) => {
   const { itemsA, itemsB, onChangeCheckbox, onClickMoveParentAToB, onClickMoveParentBToA } =
     useView(initialItems);
 
@@ -17,8 +16,8 @@ export const View: FC<ViewProps> = ({ initialItems }) => {
     <StyledWrapper>
       <List items={itemsA} onChange={onChangeCheckbox} />
       <StyledButtons>
-        <ButtonWithIcon onClick={onClickMoveParentAToB}>{'>'}</ButtonWithIcon>
-        <ButtonWithIcon onClick={onClickMoveParentBToA}>{'<'}</ButtonWithIcon>
+        <Button onClick={onClickMoveParentAToB}>{'>'}</Button>
+        <Button onClick={onClickMoveParentBToA}>{'<'}</Button>
       </StyledButtons>
       <List items={itemsB} onChange={onChangeCheckbox} />
     </StyledWrapper>
