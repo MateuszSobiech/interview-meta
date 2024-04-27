@@ -1,14 +1,8 @@
-import { FC } from 'react';
-import { ItemsApiService } from '../../api/ItemsApiService';
 import { useSwitchItemsModule } from '../../hooks/useSwitchItemsModule';
 import { View } from '../View/View';
 
-interface SwitchItemsModuleProps {
-  service: ItemsApiService;
-}
-
-export const SwitchItemsModule: FC<SwitchItemsModuleProps> = ({ service }) => {
-  const state = useSwitchItemsModule(service);
+export const SwitchItemsModule = () => {
+  const state = useSwitchItemsModule();
 
   switch (state.type) {
     case 'loading':

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { ItemsApiService } from '../api/ItemsApiService';
 import { Item } from '../types/Item';
+import { itemsServiece } from '../api/ItemsApiService';
 
 type State =
   | {
@@ -14,15 +14,15 @@ type State =
       type: 'error';
     };
 
-export const useSwitchItemsModule = (service: ItemsApiService) => {
+export const useSwitchItemsModule = () => {
   const [state, setState] = useState<State>({ type: 'loading' });
 
   useEffect(() => {
-    service
+    itemsServiece
       .getItems()
       .then((data) => setState({ type: 'ok', items: data }))
       .catch(() => setState({ type: 'error' }));
-  }, [service]);
+  }, []);
 
   return state;
 };
