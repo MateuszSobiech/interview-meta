@@ -16,7 +16,7 @@ const fetchItems = async (): Promise<Item[]> => {
   return new Promise((res) => {
     setTimeout(() => {
       res(initialItems);
-    }, 2000);
+    }, 1000);
   });
 };
 
